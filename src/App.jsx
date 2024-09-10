@@ -26,7 +26,7 @@ function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   //this function will be re-executed each time app component re-renders. 
-  // and because this function cahanges state it will cause a re-render of
+  // and because this function changes state, it will cause a re-render of
   // app component itself too, thus causing an infinite loop. Use effect hook 
   // prevents this by depending this code's execution on a dependencies array.
   // and also because of useEffect hook now this function will be executed after
@@ -75,6 +75,10 @@ function App() {
     }
   }
 
+  // when we use a function as a dependency in a useEffect hook we should define 
+  // that function with a useCallback hook. with this hook doesn't create the 
+  // function again and again everytime the component renders, unless one of the 
+  // dependencies in dependencies array of the useCallback hook changes.
   const handleRemovePlace = useCallback(function handleRemovePlace() {
     setPickedPlaces((prevPickedPlaces) =>
       prevPickedPlaces.filter((place) => place.id !== selectedPlace.current)
